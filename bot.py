@@ -28,10 +28,10 @@ def time(d):  # функиция получения времени
     a = datetime.now(tz)  # дата сейчас
     if d == 1:  # time(1) возращает ч:м
         a = a.strftime("%H:%M")
-    else if == 2:
+    elif d == 2:
         a = a.strftime("%d.%m.%Y  %H:%M:%S")  # time(2) возращает д:м:г ч:м:с
     else:
-      a = a.strftime("%H:%M:%S %d.%m.%Y")  # time(2) возращает д:м:г ч:м:с
+      a = a.strftime("%H:%M:%S %d.%m.%Y")  # time(2) возращает ч:м:с д:м:г
     return a
     
 
