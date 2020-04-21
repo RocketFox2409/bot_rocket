@@ -131,6 +131,7 @@ async def web(ctx):
 
 @bot.command()
 async def server(ctx):
+    await ctx.message.delete()
     members = ctx.guild.members
     online = len(list(filter(lambda x: x.status == discord.Status.online, members)))
     offline = len(list(filter(lambda x: x.status == discord.Status.offline, members)))
