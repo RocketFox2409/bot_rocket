@@ -129,6 +129,40 @@ async def web(ctx):
         await author.send("Вы не находитесь в голосовом канале")
 
 
+@bot.command()
+async def server(ctx):
+    members = ctx.guild.members
+    online = len(list(filter(lambda x: x.status == discord.Status.online, members)))
+    offline = len(list(filter(lambda x: x.status == discord.Status.offline, members)))
+    idle = len(list(filter(lambda x: x.status == discord.Status.idle, members)))
+    dnd = len(list(filter(lambda x: x.status == discord.Status.dnd, members)))
+    allchannels = len(ctx.guild.channels)
+    allvoice = len(ctx.guild.voice_channels)
+    alltext = len(ctx.guild.text_channels)
+    allroles = len(ctx.guild.roles)
+    embed = discord.Embed(title=f"Сервер `{ctx.guild.name}`", color=0xff0000, timestamp=ctx.message.created_at)
+    embed.description=(
+        f":timer: **Сервер создали: `{ctx.guild.created_at.strftime('%A, %b %#d %Y')}`**\n\n"
+        f":flag_white: **Регион: `{ctx.guild.region}`**\n\n"
+        f":cowboy:  **Глава сервера: `{ctx.guild.owner}`**\n\n"
+        f":tools: **Ботов на сервере: `{len([m for m in members if m.bot])}`**\n\n"
+        f":green_circle: **Онлайн: `{online}`**\n\n"
+        f":black_circle: **Оффлайн: `{offline}`**\n\n"
+        f":yellow_circle: **Отошли: `{idle}`**\n\n"
+        f":red_circle: **Не трогать: `{dnd}`**\n\n"
+        f":shield: **Уровень верификации: `{ctx.guild.verification_level}`**\n\n"
+        f":musical_keyboard: **Всего каналов: `{allchannels}`**\n\n"
+        f":loud_sound: **Голосовых каналов: `{allvoice}`**\n\n"
+        f":keyboard: **Текстовых каналов: `{alltext}`**\n\n"
+        f":briefcase: **Всего ролей: `{allroles}`**\n\n"
+        f":slight_smile: **Людей на сервере: `{ctx.guild.member_count}`**\n\n"
+    )
+
+    embed.set_thumbnail(url=ctx.guild.icon_url)
+    embed.set_footer(text=f"Информация о сервере: {ctx.guild.name}")
+    await ctx.send(embed=embed)
+
+
 # @bot.command()
 # async def clear(ctx, amount: int):
     # await ctx.channel.purge(limit= amount)
