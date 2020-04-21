@@ -11,7 +11,7 @@ import os
 import pytz
 
 __version__ = '1.0.9'
-tz = pytz.timezone('Omsk')
+tz = pytz.timezone('Asia/Omsk')
 
 # переменные
 Bot_id = 699840979942899752
