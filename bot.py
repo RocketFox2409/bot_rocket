@@ -11,7 +11,8 @@ import os
 import pytz
 
 __version__ = '1.0.9'
-tz = pytz.timezone('Asia/Omsk')
+
+__timezone__ = "Etc/GMT+6"
 
 # переменные
 Bot_id = 699840979942899752
@@ -23,6 +24,7 @@ ADMIN_LIST = config.ADMIN_LIST
 
 bot = commands.Bot(command_prefix=">")  # префикс для комманд
 
+tz = pytz.timezone('Asia/Omsk')
 
 def time(d):  # функиция получения времени
     a = datetime.now(tz)  # дата сейчас
@@ -39,7 +41,7 @@ print("Подключение...")
 
 @bot.event
 async def on_ready():
-    stat = "Бот запущен" + "\nВерсия бота: " + __version__ + "\nВремя запуска (UTC+06:00) Нур-Султан: " + time(2)
+    stat = "Бот запущен" + "\nВерсия бота: " + __version__ + "\nВремя запуска ({__timezone__}): " + time(2)
     print("""+-+-+-+-+-+-+-+-+-+\n|R|o|c|k|e|t|F|o|x|\n+-+-+-+-+-+-+-+-+-+""")
     print(stat)  # Статус в терминал
     await bot.get_channel(LOG_ID).send(f"``` {stat} ```")  # Статус в лог канал
