@@ -39,7 +39,7 @@ async def on_ready():
     print("""+-+-+-+-+-+-+-+-+-+\n|R|o|c|k|e|t|F|o|x|\n+-+-+-+-+-+-+-+-+-+""")
     print(stat)  # Статус в терминал
     await bot.get_channel(LOG_ID).send(f"``` {stat} ```")  # Статус в лог канал
-    await bot.change_presence(activity=discord.Game(f'Был запущен в {time(1)}'))
+    await bot.change_presence(activity=discord.Game(f'Был запущен в {time(2)}'))
 
 
 @bot.event
