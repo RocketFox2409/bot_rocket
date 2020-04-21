@@ -3,12 +3,13 @@
    просто скопируешь его!"""
 
 import discord
-from discord import utils
-from discord.ext import commands 
-from datetime import datetime
 import config  # ТОКЕН!!!, ид канала
 import os
 import pytz
+import sys 
+from discord import utils
+from discord.ext import commands 
+from datetime import datetime
 
 __version__ = '1.0.9'
 
@@ -22,6 +23,7 @@ pred_id = config.PRED_ID
 ADMIN_LIST = config.ADMIN_LIST
 # TOKEN = config.TOKEN
 
+os = sys.platform
 bot = commands.Bot(command_prefix=">")  # префикс для комманд
 
 tz = pytz.timezone(__timezone__)
@@ -37,7 +39,7 @@ def time(d):  # функиция получения времени
     return a
     
 
-print("Подключение...")
+print(f"Подключение({os})...")
 
 @bot.event
 async def on_ready():
@@ -170,5 +172,8 @@ async def server(ctx):
     # await ctx.send(f"Удалено {amount} сообщений")
 
 
-token = os.environ.get("BOT_TOKEN")
-bot.run(str(token))  # ТОКЕННН!
+if os == "win32":
+    print("win32")
+else:
+    token = os.environ.get("BOT_TOKEN")
+    bot.run(str(token))  # ТОКЕННН!
