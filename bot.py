@@ -128,4 +128,4 @@ async def web(ctx):
 
 
 token = os.environ.get("BOT_TOKEN")
-bot.run(token)  # ТОКЕННН!
+bot.run(str(token))  # ТОКЕННН!
