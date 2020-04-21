@@ -127,6 +127,5 @@ async def web(ctx):
     # await ctx.send(f"Удалено {amount} сообщений")
 
 
-# bot.run(TOKEN)  # ТОКЕННН!
-
 token = os.environ.get("BOT_TOKEN")
+bot.run(token)  # ТОКЕННН!
