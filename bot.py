@@ -109,6 +109,7 @@ async def on_raw_reaction_add(payload):
 
 @bot.command()
 async def D(ctx):
+    await ctx.message.delete()
     i = 0
     for user in ctx.guild.members:
         # print(f"{user.name}#{user.discriminator} Статус: {user.status}")
@@ -121,6 +122,7 @@ async def D(ctx):
 @bot.command()
 async def web(ctx):
     author = ctx.message.author
+    await ctx.message.delete()
     try:
         await author.send(f"https://discordapp.com/channels/{author.guild.id}/{author.voice.channel.id}")
     except:
