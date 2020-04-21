@@ -23,7 +23,7 @@ pred_id = config.PRED_ID
 ADMIN_LIST = config.ADMIN_LIST
 # TOKEN = config.TOKEN
 
-os = sys.platform
+os_ = sys.platform
 bot = commands.Bot(command_prefix=">")  # префикс для комманд
 
 tz = pytz.timezone(__timezone__)
@@ -39,7 +39,7 @@ def time(d):  # функиция получения времени
     return a
     
 
-print(f"Подключение({os})...")
+print(f"Подключение({os_})...")
 
 @bot.event
 async def on_ready():
@@ -172,7 +172,7 @@ async def server(ctx):
     # await ctx.send(f"Удалено {amount} сообщений")
 
 
-if os == "win32":
+if os_ == "win32":
     print("win32")
 else:
     token = os.environ.get("BOT_TOKEN")
