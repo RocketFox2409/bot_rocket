@@ -8,8 +8,10 @@ from discord.ext import commands
 from datetime import datetime
 import config  # ТОКЕН!!!, ид канала
 import os
+import pytz
 
 __version__ = '1.0.9'
+tz = pytz.timezone('Omsk')
 
 # переменные
 Bot_id = 699840979942899752
@@ -23,11 +25,13 @@ bot = commands.Bot(command_prefix=">")  # префикс для комманд
 
 
 def time(d):  # функиция получения времени
-    a = datetime.now()  # дата сейчас
+    a = datetime.now(tz)  # дата сейчас
     if d == 1:  # time(1) возращает ч:м
         a = a.strftime("%H:%M")
-    else:
+    else if == 2:
         a = a.strftime("%d.%m.%Y  %H:%M:%S")  # time(2) возращает д:м:г ч:м:с
+    else:
+      a = a.strftime("%H:%M:%S %d.%m.%Y")  # time(2) возращает д:м:г ч:м:с
     return a
     
 
@@ -39,7 +43,7 @@ async def on_ready():
     print("""+-+-+-+-+-+-+-+-+-+\n|R|o|c|k|e|t|F|o|x|\n+-+-+-+-+-+-+-+-+-+""")
     print(stat)  # Статус в терминал
     await bot.get_channel(LOG_ID).send(f"``` {stat} ```")  # Статус в лог канал
-    await bot.change_presence(activity=discord.Game(f'Был запущен в {time(2)}'))
+    await bot.change_presence(activity=discord.Game(f'Был запущен в {time(3)}'))
 
 
 @bot.event
