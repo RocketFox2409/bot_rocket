@@ -34,7 +34,7 @@ def time(d):  # функиция получения времени
     elif d == 2:
         a = a.strftime("%d.%m.%Y  %H:%M:%S")  # time(2) возращает д:м:г ч:м:с
     else:
-      a = a.strftime("%H:%M:%S %d.%m.%Y")  # time(2) возращает ч:м:с д:м:г
+      a = a.strftime("%H:%M:%S %d.%m.%Y")  # time(3) возращает ч:м:с д:м:г
     return a
     
 
@@ -64,12 +64,12 @@ async def on_member_join(member):
 async def on_message(message):  # если пришло сообщения
     await bot.process_commands(message)  # обработчик команд
     if message.channel.id == Auth_id and message.author.id != Bot_id:  # добовление реакций в канал аутентификация
-        await bot.get_channel(LOG_ID).send(f'Участник {message.author} ({message.author.display_name}) подал заявку в {time(1)} на аутентификацию')
+        await bot.get_channel(LOG_ID).send(f'Участник {message.author} ({message.author.display_name}) подал заявку в {time(3)} на аутентификацию')
         await message.add_reaction("👍")
         await message.add_reaction("👎")
 
     if message.channel.id == pred_id and message.author.id != Bot_id:  # добовление реакций в канал предложения
-        await bot.get_channel(LOG_ID).send(f'Участник {message.author} ({message.author.display_name}) написал предложения или жалабу в {time(1)}')
+        await bot.get_channel(LOG_ID).send(f'Участник {message.author} ({message.author.display_name}) написал предложения или жалабу в {time(3)}')
         await message.add_reaction("✅")
         await message.add_reaction("❎")
         # await message.add_reaction("<:Warzone2100:693087501220446248>")
@@ -95,7 +95,7 @@ async def on_raw_reaction_add(payload):
                 x2 = x1[:-3] 
                 x3 = x[3] + " | " + x2
                 await author.edit(nick =x3) # изменение ника
-                await bot.get_channel(LOG_ID).send(f'Заявка для {author} ({author.display_name}) одобрена {time(2)}')  # Статус в лог канал
+                await bot.get_channel(LOG_ID).send(f'Заявка для {author} ({author.display_name}) одобрена {time(3)}')  # Статус в лог канал
                 role = discord.utils.get(member.guild.roles, name=config.ROLE_REG)
                 await member.add_roles(role)  # добовления роли
                 role_1 = discord.utils.get(member.guild.roles, name=config.ROLE_REG_1)
