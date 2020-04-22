@@ -106,13 +106,13 @@ async def on_raw_reaction_add(payload):
                 role_1 = discord.utils.get(member.guild.roles, name=config.ROLE_REG_1)
                 await member.remove_roles(role_1)  # удоления роли
             else:
-                await member.send(f'''Вашу заявку, админ({member_1.name}) посчитал не правильной, {author}  вам стоит её исправить.
+                await member.send(f'''Вашу заявку, админ({member_1.author.display_name}) посчитал не правильной, {author}  вам стоит её исправить.
 Возможно, вы не поставили пробел между цифрой и словом. Например:
 1.ВАШЕ ИМЯ. (это не правильно)
 1. ВАШЕ ИМЯ. **(это правильно)**
 **Это важно!**''')
                 await member.send(message.content)
-                #await bot.get_channel(Auth_id).send(f'Заявка для {author} ({author.display_name}) не одобрена')  # Статус в лог канал
+                # await bot.get_channel(Auth_id).send(f'Заявка для {author} ({author.display_name}) не одобрена')  # Статус в лог канал
         else:
             if payload.user_id != Bot_id:
                 await message.remove_reaction(payload.emoji, member_1)
