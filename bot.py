@@ -188,7 +188,7 @@ async def google(ctx, *, msg):
 
 if sys.platform == "win32":
     # token = open('C:\Users\FOX\Desktop\py\token.txt', 'r')
-    token = "Njk5ODQwOTc5OTQyODk5NzUy.Xp_5vw.Zcf1AwJXZGjSRDuXyp63JtYNmZk"
+    #token = "N232424"
     bot.run(token)
 else:
     token = os.environ.get("BOT_TOKEN")
