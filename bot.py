@@ -43,7 +43,7 @@ print(f"Подключение({sys.platform})...")
 
 @bot.event
 async def on_ready():
-    stat = "Бот запущен" + "\nВерсия бота: " + __version__ + "\nВремя запуска ("+__timezone__+"): " + time(2)
+    stat = "Бот запущен" + "\nВерсия бота: " + __version__ + "\nВремя запуска ("+__timezone__+"): " + time(2) +"\n" + sys.platform
     print("""+-+-+-+-+-+-+-+-+-+\n|R|o|c|k|e|t|F|o|x|\n+-+-+-+-+-+-+-+-+-+""")
     print(stat)  # Статус в терминал
     await bot.get_channel(LOG_ID).send(f"``` {stat} ```")  # Статус в лог канал
