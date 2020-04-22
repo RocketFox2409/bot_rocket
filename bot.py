@@ -11,7 +11,7 @@ from discord import utils
 from discord.ext import commands 
 from datetime import datetime
 
-__version__ = '1.0.9'
+__version__ = '1.1.0'
 
 __timezone__ = "Asia/Omsk"
 
@@ -23,7 +23,6 @@ pred_id = config.PRED_ID
 ADMIN_LIST = config.ADMIN_LIST
 # TOKEN = config.TOKEN
 
-os_ = sys.platform
 bot = commands.Bot(command_prefix=">")  # префикс для комманд
 
 tz = pytz.timezone(__timezone__)
@@ -39,7 +38,7 @@ def time(d):  # функиция получения времени
     return a
     
 
-print(f"Подключение({os_})...")
+print(f"Подключение({sys.platform})...")
 
 @bot.event
 async def on_ready():
@@ -166,14 +165,24 @@ async def server(ctx):
     await ctx.send(embed=embed)
 
 
+@bot.command()
+async def google(ctx, args):
+    try:
+        await ctx.send(f"https://google.gik-team.com/?q={args}")
+    except:
+        await ctx.send("Ошибка")
+
+
 # @bot.command()
 # async def clear(ctx, amount: int):
     # await ctx.channel.purge(limit= amount)
     # await ctx.send(f"Удалено {amount} сообщений")
 
 
-if os_ == "win32":
-    print("win32")
+if sys.platform == "win32":
+    # token = open('C:\Users\FOX\Desktop\py\token.txt', 'r')
+    token = "232"
+    bot.run(token)
 else:
     token = os.environ.get("BOT_TOKEN")
     bot.run(str(token))  # ТОКЕННН!
