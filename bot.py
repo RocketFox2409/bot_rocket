@@ -112,6 +112,7 @@ async def on_raw_reaction_add(payload):
 1. ВАШЕ ИМЯ. **(это правильно)**
 **Это важно!**''')
                 await member.send(message.content)
+                await message.delete()
                 # await bot.get_channel(Auth_id).send(f'Заявка для {author} ({author.display_name}) не одобрена')  # Статус в лог канал
         else:
             if payload.user_id != Bot_id:
