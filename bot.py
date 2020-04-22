@@ -7,7 +7,6 @@ import config  # ТОКЕН!!!, ид канала
 import os
 import pytz
 import sys
-import urllib
 from discord import utils
 from discord.ext import commands 
 from datetime import datetime
