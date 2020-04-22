@@ -106,9 +106,9 @@ async def on_raw_reaction_add(payload):
                 role_1 = discord.utils.get(member.guild.roles, name=config.ROLE_REG_1)
                 await member.remove_roles(role_1)  # удоления роли
             else:
-                await member.send(f'''Вашу заявку, админ(@{payload.user_id.author}) посчитал не правильной, @{author}  вам стоит её исправить.
+                await member.send(f'''Вашу заявку, админ(@{member.nick}) посчитал не правильной, @{author}  вам стоит её исправить.
 Возможно, вы не поставили пробел между цифрой и словом. Например:
-1.ВАШЕ ИМЯ. (это не правильно)
+1.ВАШЕ ИМЯ. **(это не правильно)**
 1. ВАШЕ ИМЯ. **(это правильно)**
 **Это важно!**''')
                 await member.send(message.content)
