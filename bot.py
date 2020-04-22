@@ -166,10 +166,10 @@ async def server(ctx):
 
 
 @bot.command()
-async def google(ctx, args):
+async def google(ctx, *args):
     await ctx.message.delete()
     try:
-        await ctx.send(f"https://google.gik-team.com/?q={args[1]}")
+        await ctx.send(f"https://google.gik-team.com/?q={args}")
     except:
         await ctx.send("Ошибка")
 
