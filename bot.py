@@ -23,6 +23,7 @@ pred_id = config.PRED_ID
 ADMIN_LIST = config.ADMIN_LIST
 # TOKEN = config.TOKEN
 
+
 bot = commands.Bot(command_prefix=">")  # префикс для комманд
 
 tz = pytz.timezone(__timezone__)
@@ -51,8 +52,12 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    x = member.guild.members  # список юзеров на сервере
-    await member.send(f"Ку епта {member.name} для получения всех прав пройдите в канал #⚡аутентификация!!")
+    x = member.guild.members  # список юзеров на сервере {member.name}
+    
+    await member.send(f"""Добро пожаловать уважаемый {member.name} на наш уютный сервер - на этом сервере вы сможешь найти себе занятие, только веди себя хорошо и не пересекай черту правил
+Найдешь с кем можно будет поиграть в ту или иную игру; тут есть много разных людей, и со многими вы сможешь подружиться или просто пообщаться; 
+Администрация желает вам приятного времяпрепровождения...""")
+
     await bot.get_channel(LOG_ID).send(f"Пресоединился новый участник {member.name}#{member.discriminator}")
     await bot.get_channel(701426151704494080).edit(name= f"Пользователей: {len(x)}")
     await bot.get_channel(701435569309483098).edit(name= member.name)
@@ -101,7 +106,7 @@ async def on_raw_reaction_add(payload):
                 role_1 = discord.utils.get(member.guild.roles, name=config.ROLE_REG_1)
                 await member.remove_roles(role_1)  # удоления роли
             else:
-                await member.send(f'Ваша заявка не одобрена')
+                await member.send(f'Вашу заявку, админ посчитал не правильной, {author.display_name} тебе стоит её переделать.')
                 await bot.get_channel(Auth_id).send(f'Заявка для {author} ({author.display_name}) не одобрена')  # Статус в лог канал
         else:
             if payload.user_id != Bot_id:
