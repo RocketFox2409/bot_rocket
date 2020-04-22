@@ -169,7 +169,6 @@ async def server(ctx):
 @bot.command()
 async def google(ctx, *, msg):
     msg = msg.split(" ")
-    print(msg)
     g = ""
     for x in msg:
         g = g + "+" + x
