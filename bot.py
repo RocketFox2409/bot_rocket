@@ -166,7 +166,7 @@ async def server(ctx):
 
 
 @bot.command()
-async def google(ctx, msg = None):
+async def google(ctx, *, msg = None):
     await ctx.message.delete()
     try:
         await ctx.send(f"https://google.gik-team.com/?q={msg}")
