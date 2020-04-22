@@ -6,7 +6,8 @@ import discord
 import config  # ТОКЕН!!!, ид канала
 import os
 import pytz
-import sys 
+import sys
+import urllib
 from discord import utils
 from discord.ext import commands 
 from datetime import datetime
@@ -166,10 +167,15 @@ async def server(ctx):
 
 
 @bot.command()
-async def google(ctx, *, msg = None):
+async def google(ctx, *, msg):
+    msg = msg.split(" ")
+    print(msg)
+    g = ""
+    for x in msg:
+        g = g + "+" + x
     await ctx.message.delete()
     try:
-        await ctx.send(f"https://google.gik-team.com/?q={msg}")
+        await ctx.send(f"https://google.gik-team.com/?q={g}")
     except:
         await ctx.send("Ошибка")
 
@@ -182,7 +188,7 @@ async def google(ctx, *, msg = None):
 
 if sys.platform == "win32":
     # token = open('C:\Users\FOX\Desktop\py\token.txt', 'r')
-    token = "232"
+    token = "Njk5ODQwOTc5OTQyODk5NzUy.Xp_5vw.Zcf1AwJXZGjSRDuXyp63JtYNmZk"
     bot.run(token)
 else:
     token = os.environ.get("BOT_TOKEN")
