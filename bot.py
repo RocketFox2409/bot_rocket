@@ -22,7 +22,7 @@ ADMIN_LIST = config.ADMIN_LIST # лист админов
 # TOKEN = config.TOKEN
 
 
-bot = commands.Bot(command_prefix=">")  # префикс для комманд
+bot = commands.Bot(command_prefix="E!")  # префикс для комманд
 
 tz = pytz.timezone(__timezone__)
 
