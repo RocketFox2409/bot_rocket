@@ -4,7 +4,7 @@
 
 import discord
 import config  # ид канала
-import os, sys, pytz
+import os, sys, pytz, asyncio
 from discord import utils
 from discord.ext import commands 
 from datetime import datetime
@@ -57,7 +57,7 @@ async def on_member_join(member):
 Администрация желает вам приятного времяпрепровождения...""")
 
     await bot.get_channel(LOG_ID).send(f"Пресоединился новый участник {member.name}#{member.discriminator}")
-    await bot.get_channel(701426151704494080).edit(name= f"Пользователей: {len(x)}")
+    await bot.get_channel(701426151704494080).edit(name= f"Участников: {len(x)}")
     await bot.get_channel(701435569309483098).edit(name= member.name)
     role = discord.utils.get(member.guild.roles, name=config.ROLE_REG_1)
     await member.add_roles(role)
