@@ -3,24 +3,22 @@
    просто скопируешь его!"""
 
 import discord
-import config  # ТОКЕН!!!, ид канала
-import os
-import pytz
-import sys
+import config  # ид канала
+import os, sys, pytz
 from discord import utils
 from discord.ext import commands 
 from datetime import datetime
 
-__version__ = '1.1.0'
+__version__ = '1.1.2'
 
 __timezone__ = "Asia/Omsk"
 
 # переменные
 Bot_id = 699840979942899752
-LOG_ID = config.LOG_ID
-Auth_id = config.AUTH_ID
-pred_id = config.PRED_ID
-ADMIN_LIST = config.ADMIN_LIST
+LOG_ID = config.LOG_ID # канал для логов
+Auth_id = config.AUTH_ID # канал для атунтификации
+pred_id = config.PRED_ID # канал предложений
+ADMIN_LIST = config.ADMIN_LIST # лист админов
 # TOKEN = config.TOKEN
 
 
