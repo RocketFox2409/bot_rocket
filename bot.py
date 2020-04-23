@@ -142,6 +142,12 @@ async def web(ctx):
 
 
 @bot.command()
+async def embed(ctx, *, arg):
+    await ctx.message.delete()
+    await ctx.send(embed = discord.Embed(description = f'{arg}', color=0x0c0c0c))
+
+
+@bot.command()
 async def server(ctx):
     await ctx.message.delete()
     members = ctx.guild.members
