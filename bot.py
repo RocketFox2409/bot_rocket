@@ -68,8 +68,12 @@ async def on_message(message):  # если пришло сообщения
     await bot.process_commands(message)  # обработчик команд
     if message.channel.id == Auth_id and message.author.id != Bot_id:  # добовление реакций в канал аутентификация
         await bot.get_channel(LOG_ID).send(f'Участник {message.author} ({message.author.display_name}) подал заявку в {time(3)} на аутентификацию')
-        await message.add_reaction("👍")
-        await message.add_reaction("👎")
+        reaction = [
+            "👍",
+            "👎",
+        ]
+        for add in reaction:
+            await message.add_reaction(add)
 
     if message.channel.id == pred_id and message.author.id != Bot_id:  # добовление реакций в канал предложения
         await bot.get_channel(LOG_ID).send(f'Участник {message.author} ({message.author.display_name}) написал предложения или жалабу в {time(3)}')
