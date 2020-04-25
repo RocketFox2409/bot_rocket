@@ -14,6 +14,7 @@ __version__ = '1.1.2'
 __timezone__ = "Asia/Omsk"
 
 # переменные
+stat = 0
 Bot_id = 699840979942899752
 LOG_ID = config.LOG_ID # канал для логов
 Auth_id = config.AUTH_ID # канал для атунтификации
@@ -127,8 +128,15 @@ async def on_raw_reaction_add(payload):
 
 @bot.event
 async def on_member_update(before, after):
-    print(before)
-    print(after)
+    global stat
+    i = 0
+    stat += 1
+    if stat >= 20:
+        for user in ctx.guild.members:
+            if user.status != discord.Status.offline:
+                i +=1
+                await bot.get_channel(703576114723029163).edit(name= f"В сети: {i}")
+
 
 
 @bot.command()
