@@ -134,6 +134,7 @@ async def on_member_update(before, after):
     if stat >= 20:
         for user in after.guild.members:
             if user.status != discord.Status.offline:
+                global i
                 i +=1
     await bot.get_channel(703576114723029163).edit(name= f"В сети: {i}")
 
