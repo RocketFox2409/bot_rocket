@@ -135,20 +135,10 @@ async def on_member_update(before, after):
         for user in after.guild.members:
             if user.status != discord.Status.offline:
                 i +=1
-                await bot.get_channel(703576114723029163).edit(name= f"В сети: {i}")
+    await bot.get_channel(703576114723029163).edit(name= f"В сети: {i}")
 
 
 
-@bot.command()
-async def D(ctx):
-    await ctx.message.delete()
-    i = 0
-    for user in ctx.guild.members:
-        # print(f"{user.name}#{user.discriminator} Статус: {user.status}")
-        if user.status != discord.Status.offline:
-            i +=1
-            print (f"{user.name}#{user.discriminator} Статус: {user.status}")       
-    print(i)
 
 
 @bot.command()
