@@ -131,13 +131,12 @@ async def on_member_update(before, after):
     global stat
     i = 0
     stat += 1
-    if stat >= 20:
+    if stat > 4:
         for user in after.guild.members:
             if user.status != discord.Status.offline:
-                print(f"{user}########{user.status}")
                 i +=1
-    stat = 0
-    await bot.get_channel(703576114723029163).edit(name= f"В сети: {i}")
+        stat = 0
+        await bot.get_channel(703576114723029163).edit(name= f"В сети: {i}")
 
 
 
@@ -215,7 +214,7 @@ async def google(ctx, *, msg):
 
 if sys.platform == "win32":
     # token = open('C:\Users\FOX\Desktop\py\token.txt', 'r')
-    token = "N232424"
+    token = "314314"
     bot.run(token)
 else:
     token = os.environ.get("BOT_TOKEN")
