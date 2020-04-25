@@ -127,7 +127,7 @@ async def on_raw_reaction_add(payload):
 
 
 @bot.event
-async def on_member_update(after):
+async def on_member_update(before, after):
     global stat
     i = 0
     stat += 1
