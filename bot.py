@@ -129,9 +129,9 @@ async def on_raw_reaction_add(payload):
 @bot.event
 async def on_member_update(before, after):
     global stat
-    i = 0
     stat += 1
-    if stat > 4:
+    if stat > 20:
+        i = 0
         for user in after.guild.members:
             if user.status != discord.Status.offline:
                 i +=1
