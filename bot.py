@@ -125,6 +125,12 @@ async def on_raw_reaction_add(payload):
                 await message.remove_reaction(payload.emoji, member_1)
 
 
+@bot.event
+async def on_member_update(before, after):
+    print(before)
+    print(after)
+
+
 @bot.command()
 async def D(ctx):
     await ctx.message.delete()
