@@ -27,6 +27,7 @@ bot = commands.Bot(command_prefix="E!")  # префикс для комманд
 
 tz = pytz.timezone(__timezone__)
 
+
 def time(d):  # функиция получения времени
     a = datetime.now(tz)  # дата сейчас
     if d == 1:  # time(1) возращает ч:м
@@ -139,9 +140,6 @@ async def on_member_update(before, after):
         await bot.get_channel(703576114723029163).edit(name= f"В сети: {i}")
 
 
-
-
-
 @bot.command()
 async def web(ctx):
     author = ctx.message.author
@@ -156,6 +154,12 @@ async def web(ctx):
 async def embed(ctx, *, arg):
     await ctx.message.delete()
     await ctx.send(embed = discord.Embed(description = f'{arg}', color=0x0c0c0c))
+
+
+@bot.command()
+async def echo(ctx, *, arg):
+    await ctx.message.delete()
+    await ctx.send(arg)
 
 
 @bot.command()
