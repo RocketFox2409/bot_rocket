@@ -131,13 +131,18 @@ async def on_raw_reaction_add(payload):
 async def on_member_update(before, after):
     global stat
     stat += 1
-    if stat > 20:
+    if stat > 2:
+        #member = discord.utils.get(message.guild.members, name='Foo')
+        #users = []
         i = 0
         for user in after.guild.members:
             if user.status != discord.Status.offline:
+                #users[user] = f"{user.name}:{user.status}"
                 i +=1
+        #print(users)
         stat = 0
         await bot.get_channel(703576114723029163).edit(name= f"В сети: {i}")
+        #await .edit(content=users)
 
 
 @bot.command()
@@ -156,10 +161,10 @@ async def embed(ctx, *, arg):
     await ctx.send(embed = discord.Embed(description = f'{arg}', color=0x0c0c0c))
 
 
-@bot.command()
-async def echo(ctx, *, arg):
-    await ctx.message.delete()
-    await ctx.send(arg)
+#@bot.command()
+#async def echo(ctx, *, arg):
+#    await ctx.message.delete()
+#    await ctx.send(arg)
 
 
 @bot.command()
@@ -210,15 +215,15 @@ async def google(ctx, *, msg):
         await ctx.send("Ошибка")
 
 
-# @bot.command()
-# async def clear(ctx, amount: int):
-    # await ctx.channel.purge(limit= amount)
-    # await ctx.send(f"Удалено {amount} сообщений")
+#@bot.command()
+#async def clear(ctx, amount: int):
+#    await ctx.channel.purge(limit= amount)
+#    await ctx.send(f"Удалено {amount} сообщений")
 
 
 if sys.platform == "win32":
     # token = open('C:\Users\FOX\Desktop\py\token.txt', 'r')
-    token = "314314"
+    token = "Njk5ODQwOTc5OTQyODk5NzUy.XqVQVw.BjiMpivykaJ0iSGhZJ-oYGqKbP0"
     bot.run(token)
 else:
     token = os.environ.get("BOT_TOKEN")
