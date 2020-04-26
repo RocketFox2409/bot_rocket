@@ -103,7 +103,7 @@ async def on_raw_reaction_add(payload):
 
         if payload.user_id in ADMIN_LIST:
             if payload.emoji.name == '👍':
-                x = message_text.split(" ")
+                x = message_text.split()
                 x1 = x[1]
                 x2 = x1[:-3] 
                 x3 = x[3] + " | " + x2
@@ -131,18 +131,20 @@ async def on_raw_reaction_add(payload):
 async def on_member_update(before, after):
     global stat
     stat += 1
-    if stat > 2:
-        #member = discord.utils.get(message.guild.members, name='Foo')
-        #users = []
+    if stat > 1:
+        stat = 0
+        channel = bot.get_channel(693056342440804404)  # получение канала сообщения
+        message = await channel.fetch_message(703894824813592646)  # ид сообщения
+        users = []
+        users.append("Список пользоватлей в сети")
         i = 0
         for user in after.guild.members:
             if user.status != discord.Status.offline:
-                #users[user] = f"{user.name}:{user.status}"
-                i +=1
-        #print(users)
-        stat = 0
+                i += 1
+                users.append(f"{user} Статус: {config.USER_STAT[str(user.status)]}")
+        users.append(f"Пользоватлей в сети на сервере: {i}")
         await bot.get_channel(703576114723029163).edit(name= f"В сети: {i}")
-        #await .edit(content=users)
+        await message.edit(content="\n".join(users))
 
 
 @bot.command()
@@ -204,10 +206,10 @@ async def server(ctx):
 
 @bot.command()
 async def google(ctx, *, msg):
-    msg = msg.split(" ")
+    msg = msg.split()
     g = ""
     for x in msg:
-        g = g + "+" + x
+        g += "+" + x
     await ctx.message.delete()
     try:
         await ctx.send(f"https://google.gik-team.com/?q={g}")
@@ -223,7 +225,7 @@ async def google(ctx, *, msg):
 
 if sys.platform == "win32":
     # token = open('C:\Users\FOX\Desktop\py\token.txt', 'r')
-    token = "32554245"
+    token = "353656"
     bot.run(token)
 else:
     token = os.environ.get("BOT_TOKEN")
