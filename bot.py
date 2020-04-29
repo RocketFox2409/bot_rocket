@@ -70,21 +70,13 @@ async def on_message(message):  # если пришло сообщения
     await bot.process_commands(message)  # обработчик команд
     if message.channel.id == Auth_id and message.author.id != Bot_id:  # добовление реакций в канал аутентификация
         await bot.get_channel(LOG_ID).send(f'Участник {message.author} ({message.author.display_name}) подал заявку в {time(3)} на аутентификацию')
-        reaction = [
-            "👍",
-            "👎",
-        ]
-        for add in reaction:
-            await message.add_reaction(add)
+        await message.add_reaction('👍')
+        await message.add_reaction('👎')
 
     if message.channel.id == pred_id and message.author.id != Bot_id:  # добовление реакций в канал предложения
         await bot.get_channel(LOG_ID).send(f'Участник {message.author} ({message.author.display_name}) написал предложения или жалабу в {time(3)}')
-        reaction = [
-            "✅",
-            "❎",
-        ]
-        for add in reaction:
-            await message.add_reaction(add)
+        await message.add_reaction("✅")
+        await message.add_reaction("❎")
         # await message.add_reaction("<:Warzone2100:693087501220446248>")
 
 
@@ -216,6 +208,16 @@ async def google(ctx, *, msg):
     except:
         await ctx.send("Ошибка")
 
+@bot.command()
+@commands.is_owner()
+async def restart(ctx):
+    emd = discord.Embed(colour= 0x19ff19, title= f"Перезагрузка бота")
+    emd.set_author(name= "Выполнено")
+    emd.set_footer(text= "Sayuri Rewrite")
+    await ctx.send(embed=emd)
+    msg = "> :recycle: **Sayuri Rewrite | Reloaded**"
+    await bot.get_channel(LOG_ID).send(msg)
+    os.execl(sys.executable, sys.executable, * sys.argv)
 
 #@bot.command()
 #async def clear(ctx, amount: int):
