@@ -150,6 +150,7 @@ async def web(ctx):
 
 
 @bot.command()
+@commands.is_owner()
 async def embed(ctx, *, arg):
     await ctx.message.delete()
     await ctx.send(embed = discord.Embed(description = f'{arg}', color=0x0c0c0c))
@@ -211,11 +212,12 @@ async def google(ctx, *, msg):
 @bot.command()
 @commands.is_owner()
 async def restart(ctx):
-    emd = discord.Embed(colour= 0x19ff19, title= f"Перезагрузка бота")
+    await ctx.message.delete()
+    emd = discord.Embed(colour= 0x19ff19, title= f"Перезагрузка бота.....")
     emd.set_author(name= "Выполнено")
-    emd.set_footer(text= "Sayuri Rewrite")
+    emd.set_footer(text= "Enotik")
     await ctx.send(embed=emd)
-    msg = "> :recycle: **Sayuri Rewrite | Reloaded**"
+    msg = "> :recycle: **Enotik | Перезагружен**"
     await bot.get_channel(LOG_ID).send(msg)
     os.execl(sys.executable, sys.executable, * sys.argv)
 
