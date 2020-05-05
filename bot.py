@@ -207,6 +207,19 @@ async def google(ctx, *, question):
         await ctx.send("Ошибка")
 
 @bot.command()
+async def ping(ctx):
+    try:
+        await ctx.message.delete()
+    except:
+        pass
+    emb = discord.Embed(
+        title= 'Текущий пинг',
+        description= f'{bot.ws.latency * 1000:.0f} ms',
+        color = 0x00ffff
+    )
+    await ctx.send(embed=emb)
+
+@bot.command()
 @commands.is_owner()
 async def restart(ctx):
     await ctx.message.delete()
