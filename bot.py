@@ -123,7 +123,7 @@ async def on_raw_reaction_add(payload):
 async def on_member_update(before, after):
     global stat
     stat += 1
-    if stat > 5:
+    if stat > 2:
         stat = 0
         i = 0
         channel = bot.get_channel(693056342440804404)  # получение канала сообщения
@@ -156,10 +156,11 @@ async def embed(ctx, *, arg):
     await ctx.send(embed = discord.Embed(description = f'{arg}', color=0x0c0c0c))
 
 
-#@bot.command()
-#async def echo(ctx, *, arg):
-#    await ctx.message.delete()
-#    await ctx.send(arg)
+@bot.command()
+@commands.is_owner()
+async def echo(ctx, *, arg):
+    await ctx.message.delete()
+    await ctx.send(arg)
 
 
 @bot.command()
@@ -198,14 +199,10 @@ async def server(ctx):
 
 
 @bot.command()
-async def google(ctx, *, msg):
-    msg = msg.split()
-    g = ""
-    for x in msg:
-        g += "+" + x
-    await ctx.message.delete()
+async def google(ctx, *, question):
     try:
-        await ctx.send(f"https://google.gik-team.com/?q={g}")
+        url = 'https://google.gik-team.com/?q=' + str(question).replace(' ', '+')
+        await ctx.send(f'Так как кое кто не умеет гуглить , я сделала это за него.\n{url}')
     except:
         await ctx.send("Ошибка")
 
@@ -221,10 +218,11 @@ async def restart(ctx):
     await bot.get_channel(LOG_ID).send(msg)
     os.execl(sys.executable, sys.executable, * sys.argv)
 
-#@bot.command()
-#async def clear(ctx, amount: int):
-#    await ctx.channel.purge(limit= amount)
-#    await ctx.send(f"Удалено {amount} сообщений")
+@bot.command()
+@commands.is_owner()
+async def clear(ctx, amount: int):
+    await ctx.channel.purge(limit= amount)
+    await ctx.send(f"Удалено {amount} сообщений")
 
 
 if sys.platform == "win32":
