@@ -4,3 +4,4 @@ websockets
 chardet
 pytz
 asyncio
+tabulate
