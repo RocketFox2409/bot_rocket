@@ -129,14 +129,14 @@ async def on_member_update(before, after):
         i = 0
         channel = bot.get_channel(693056342440804404)  # получение канала сообщения
         message = await channel.fetch_message(703894824813592646)  # ид сообщения
-        table = PrettyTable()
-        table.field_names = ["Ник на сервере", "Ник в дискорде", "Стаутс"]
+        x = PrettyTable()
+        x.field_names = ["Ник на сервере", "Ник в дискорде", "Стаутс"]
         for user in after.guild.members:
             if user.status != discord.Status.offline:
                 i += 1
-                table.add_row([user.display_name, user, config.USER_STAT[str(user.status)]])       
+                x.add_row([user.display_name, user, config.USER_STAT[str(user.status)]])       
         await bot.get_channel(703576114723029163).edit(name= f"В сети: {i}")
-        await message.edit(content= table)
+        await message.edit(content = x)
 
 
 @bot.command()
