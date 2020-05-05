@@ -5,6 +5,7 @@
 import discord
 import config  # ид канала
 import os, sys, pytz, asyncio
+from tabulate import tabulate
 from discord import utils
 from discord.ext import commands 
 from datetime import datetime
@@ -128,15 +129,13 @@ async def on_member_update(before, after):
         i = 0
         channel = bot.get_channel(693056342440804404)  # получение канала сообщения
         message = await channel.fetch_message(703894824813592646)  # ид сообщения
-        users = []
-        users.append("Список пользоватлей в сети")
+        table=[["Ник на сервере", "Ник в дискорде", "Стаутс"]]
         for user in after.guild.members:
             if user.status != discord.Status.offline:
                 i += 1
-                users.append(f"{user.display_name}&&({user}) Статус: {config.USER_STAT[str(user.status)]}")
-        users.append(f"Пользоватлей в сети на сервере: {i}")
+                table.append([user.display_name, user, config.USER_STAT[str(user.status)]])
         await bot.get_channel(703576114723029163).edit(name= f"В сети: {i}")
-        await message.edit(content="\n".join(users))
+        await message.edit(content= f">\n{tabulate(table)}")
 
 
 @bot.command()
