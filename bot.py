@@ -134,7 +134,7 @@ async def on_member_update(before, after):
         for user in after.guild.members:
             if user.status != discord.Status.offline:
                 i += 1
-                td.append([str(user.display_name), str(user), str(config.USER_STAT[str(user.status)]]))
+                td.append(str(user.display_name), str(user), str(config.USER_STAT[str(user.status)]))
         
         columns = len(th)  # Подсчитаем кол-во столбцов на будущее.
 
