@@ -5,7 +5,7 @@
 import discord
 import config  # ид канала
 import os, sys, pytz, asyncio
-from tabulate import tabulate
+from prettytable import PrettyTable
 from discord import utils
 from discord.ext import commands 
 from datetime import datetime
@@ -129,13 +129,32 @@ async def on_member_update(before, after):
         i = 0
         channel = bot.get_channel(693056342440804404)  # получение канала сообщения
         message = await channel.fetch_message(703894824813592646)  # ид сообщения
-        table=[["Ник на сервере", "Ник в дискорде", "Стаутс"]]
+        th = ["Ник на сервере", "Ник в дискорде", "Стаутс"]
+        td = []
         for user in after.guild.members:
             if user.status != discord.Status.offline:
                 i += 1
-                table.append([user.display_name, user, config.USER_STAT[str(user.status)]])
+                td.append([user.display_name, user, config.USER_STAT[str(user.status)]])
+        
+        columns = len(th)  # Подсчитаем кол-во столбцов на будущее.
+
+        table = PrettyTable(th)  # Определяем таблицу.
+
+        # Cкопируем список td, на случай если он будет использоваться в коде дальше.
+        td_data = td[:]
+        # Входим в цикл который заполняет нашу таблицу.
+        # Цикл будет выполняться до тех пор пока у нас не кончатся данные
+        # для заполнения строк таблицы (список td_data).
+        while td_data:
+            # Используя срез добавляем первые пять элементов в строку.
+            # (columns = 5).
+            table.add_row(td_data[:columns])
+            # Используя срез переопределяем td_data так, чтобы он
+            # больше не содержал первых 5 элементов.
+            td_data = td_data[columns:]
+
         await bot.get_channel(703576114723029163).edit(name= f"В сети: {i}")
-        await message.edit(content= f">\n{tabulate(table)}")
+        await message.edit(content= table)
 
 
 @bot.command()
