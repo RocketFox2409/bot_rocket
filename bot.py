@@ -62,7 +62,7 @@ async def on_member_join(member):
     await bot.get_channel(LOG_ID).send(f"Пресоединился новый участник {member.name}#{member.discriminator}")
     await bot.get_channel(701426151704494080).edit(name= f"Участников: {len(x)}")
     await bot.get_channel(701435569309483098).edit(name= member.name)
-    role = discord.utils.get(member.guild.roles, name=config.ROLE_REG_1)
+    role = discord.utils.get(member.guild.roles, name=config.ROLE_REG)
     await member.add_roles(role)
 
 
@@ -104,8 +104,8 @@ async def on_raw_reaction_add(payload):
                 await bot.get_channel(LOG_ID).send(f'Заявка для {author} ({author.display_name}) одобрена {time(3)}')  # Статус в лог канал
                 role = discord.utils.get(member.guild.roles, name=config.ROLE_REG)
                 await member.add_roles(role)  # добовления роли
-                role_1 = discord.utils.get(member.guild.roles, name=config.ROLE_REG_1)
-                await member.remove_roles(role_1)  # удоления роли
+                #role_1 = discord.utils.get(member.guild.roles, name=config.ROLE_REG_1)
+                #await member.remove_roles(role_1)  # удоления роли
             else:
                 await member.send(f'''Вашу заявку, админ({member_1.nick}) посчитал не правильной, {member.nick}  вам стоит её исправить.
 Возможно, вы не поставили пробел между цифрой и словом. Например:
