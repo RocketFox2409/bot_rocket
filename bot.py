@@ -67,6 +67,13 @@ async def on_member_join(member):
 
 
 @bot.event
+async def on_member_remove(member):
+    x = member.guild.members  # список юзеров на сервере {member.name}
+    await bot.get_channel(701426151704494080).edit(name= f"Участников: {len(x)}")
+    await bot.get_channel(LOG_ID).send(f"Ушел участник {member.name}#{member.discriminator}")
+
+
+@bot.event
 async def on_message(message):  # если пришло сообщения
     await bot.process_commands(message)  # обработчик команд
     if message.channel.id == Auth_id and message.author.id != Bot_id:  # добовление реакций в канал аутентификация
