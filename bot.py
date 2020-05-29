@@ -1,11 +1,5 @@
-"""Made by RocketFox
-   ты не станешь КРУТЫМ ПРОГРАММИСТОМ если
-   просто скопируешь его!"""
-
-import discord
 import config  # ид канала
-import os, sys, pytz, asyncio
-from prettytable import PrettyTable
+import os, sys, pytz, asyncio, discord
 from discord import utils
 from discord.ext import commands 
 from datetime import datetime
@@ -18,10 +12,8 @@ __timezone__ = "Asia/Omsk"
 stat = 0
 Bot_id = 699840979942899752
 LOG_ID = config.LOG_ID # канал для логов
-Auth_id = config.AUTH_ID # канал для атунтификации
 pred_id = config.PRED_ID # канал предложений
 ADMIN_LIST = config.ADMIN_LIST # лист админов
-# TOKEN = config.TOKEN
 
 
 bot = commands.Bot(command_prefix="E!")  # префикс для комманд
@@ -62,7 +54,7 @@ async def on_member_join(member):
     await bot.get_channel(LOG_ID).send(f"Пресоединился новый участник {member.name}#{member.discriminator}")
     await bot.get_channel(701426151704494080).edit(name= f"Участников: {len(x)}")
     await bot.get_channel(701435569309483098).edit(name= member.name)
-    role = discord.utils.get(member.guild.roles, name=config.ROLE_REG)
+    role = discord.utils.get(member.guild.roles, id=693060312118591488)
     await member.add_roles(role)
 
 
@@ -76,55 +68,10 @@ async def on_member_remove(member):
 @bot.event
 async def on_message(message):  # если пришло сообщения
     await bot.process_commands(message)  # обработчик команд
-    if message.channel.id == Auth_id and message.author.id != Bot_id:  # добовление реакций в канал аутентификация
-        await bot.get_channel(LOG_ID).send(f'Участник {message.author} ({message.author.display_name}) подал заявку в {time(3)} на аутентификацию')
-        await message.add_reaction('👍')
-        await message.add_reaction('👎')
-
     if message.channel.id == pred_id and message.author.id != Bot_id:  # добовление реакций в канал предложения
         await bot.get_channel(LOG_ID).send(f'Участник {message.author} ({message.author.display_name}) написал предложения или жалабу в {time(3)}')
         await message.add_reaction("✅")
         await message.add_reaction("❎")
-        # await message.add_reaction("<:Warzone2100:693087501220446248>")
-
-
-@bot.event
-async def on_raw_reaction_add(payload):
-    if payload.channel_id == Auth_id:  # Проверка добавлина ли рекция на канал
-        channel = bot.get_channel(payload.channel_id)  # получение канала сообщения
-        message = await channel.fetch_message(payload.message_id)  # ид сообщения
-        author = message.author  # автор
-        message_text = message.content
-
-        guild = bot.get_guild(payload.guild_id)
-        member = guild.get_member(author.id)
-
-        member_1 = guild.get_member(payload.user_id)
-
-        if payload.user_id in ADMIN_LIST:
-            if payload.emoji.name == '👍':
-                x = message_text.split()
-                x1 = x[1]
-                x2 = x1[:-3] 
-                x3 = x[3] + " | " + x2
-                await author.edit(nick =x3) # изменение ника
-                await bot.get_channel(LOG_ID).send(f'Заявка для {author} ({author.display_name}) одобрена {time(3)}')  # Статус в лог канал
-                role = discord.utils.get(member.guild.roles, name=config.ROLE_REG)
-                await member.add_roles(role)  # добовления роли
-                #role_1 = discord.utils.get(member.guild.roles, name=config.ROLE_REG_1)
-                #await member.remove_roles(role_1)  # удоления роли
-            else:
-                await member.send(f'''Вашу заявку, админ({member_1.nick}) посчитал не правильной, {member.nick}  вам стоит её исправить.
-Возможно, вы не поставили пробел между цифрой и словом. Например:
-1.ВАШЕ ИМЯ. **(это не правильно)**
-1. ВАШЕ ИМЯ. **(это правильно)**
-**Это важно!**''')
-                await member.send(message.content)
-                await message.delete()
-                # await bot.get_channel(Auth_id).send(f'Заявка для {author} ({author.display_name}) не одобрена')  # Статус в лог канал
-        else:
-            if payload.user_id != Bot_id:
-                await message.remove_reaction(payload.emoji, member_1)
 
 
 @bot.event
@@ -162,13 +109,6 @@ async def web(ctx):
 async def embed(ctx, *, arg):
     await ctx.message.delete()
     await ctx.send(embed = discord.Embed(description = f'{arg}', color=0x0c0c0c))
-
-
-@bot.command()
-@commands.is_owner()
-async def echo(ctx, *, arg):
-    await ctx.message.delete()
-    await ctx.send(arg)
 
 
 @bot.command()
@@ -239,6 +179,7 @@ async def restart(ctx):
     await bot.get_channel(LOG_ID).send(msg)
     os.execl(sys.executable, sys.executable, * sys.argv)
 
+
 @bot.command()
 @commands.is_owner()
 async def clear(ctx, amount: int):
@@ -246,10 +187,5 @@ async def clear(ctx, amount: int):
     await ctx.send(f"Удалено {amount} сообщений")
 
 
-if sys.platform == "win32":
-    # token = open('C:\Users\FOX\Desktop\py\token.txt', 'r')
-    token = "Nj3248"
-    bot.run(token)
-else:
-    token = os.environ.get("BOT_TOKEN")
-    bot.run(str(token))  # ТОКЕННН!
+token = os.environ.get("BOT_TOKEN")
+bot.run(str(token))  # ТОКЕННН!
