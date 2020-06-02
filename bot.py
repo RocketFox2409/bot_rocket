@@ -49,9 +49,7 @@ async def on_ready():
     print(stat)  # Статус в терминал
     await bot.get_channel(LOG_ID).send(f"``` {stat} ```")  # Статус в лог канал
     await bot.change_presence(activity=discord.Game(f'Был запущен в {time(3)}'))
-    while True:
-        await bot.get_channel(717330399629672458).edit(name= f"Время по МСК: {time(9)}")
-        await asyncio.sleep(60)
+
 
 
 @bot.event
