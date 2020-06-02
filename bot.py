@@ -8,6 +8,9 @@ __version__ = '1.1.2'
 
 __timezone__ = "Asia/Omsk"
 
+tz2 = pytz.timezone("Europe/Moscow")
+
+
 # переменные
 stat = 0
 Bot_id = 699840979942899752
@@ -23,10 +26,15 @@ tz = pytz.timezone(__timezone__)
 
 def time(d):  # функиция получения времени
     a = datetime.now(tz)  # дата сейчас
+    time2 = datetime.now(tz2)
     if d == 1:  # time(1) возращает ч:м
         a = a.strftime("%H:%M")
     elif d == 2:
         a = a.strftime("%d.%m.%Y  %H:%M:%S")  # time(2) возращает д:м:г ч:м:с
+    elif d == 9:
+        a = time2.strftime("%H:%M")
+    elif d == 8:
+        a = time2.strftime("%d.%m")
     else:
       a = a.strftime("%H:%M:%S %d.%m.%Y")  # time(3) возращает ч:м:с д:м:г
     return a
@@ -79,6 +87,8 @@ async def on_member_update(before, after):
     global stat
     stat += 1
     if stat > 2:
+        await bot.get_channel(717330399629672458).edit(name= f"Время по МСК: {time(9)}")
+        await bot.get_channel(717330360949669919).edit(name= f"Дата: {time(8)}")
         stat = 0
         i = 0
         channel = bot.get_channel(693056342440804404)  # получение канала сообщения
