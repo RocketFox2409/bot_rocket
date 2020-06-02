@@ -51,7 +51,7 @@ async def on_member_join(member):
 Найдете с кем можно будет поиграть в ту или иную игру; тут есть много разных людей, и со многими вы сможете подружиться или просто пообщаться; 
 Администрация желает вам приятного времяпрепровождения...""")
 
-    await bot.get_channel(LOG_ID).send(f"Пресоединился новый участник {member.name}#{member.discriminator}")
+    await bot.get_channel(LOG_ID).send(f"Пресоединился новый участник `{member.name}#{member.discriminator}`")
     await bot.get_channel(701426151704494080).edit(name= f"Участников: {len(x)}")
     await bot.get_channel(701435569309483098).edit(name= member.name)
     role = discord.utils.get(member.guild.roles, id=693060312118591488)
@@ -62,7 +62,7 @@ async def on_member_join(member):
 async def on_member_remove(member):
     x = member.guild.members  # список юзеров на сервере {member.name}
     await bot.get_channel(701426151704494080).edit(name= f"Участников: {len(x)}")
-    await bot.get_channel(LOG_ID).send(f"Ушел участник {member.name}#{member.discriminator}")
+    await bot.get_channel(LOG_ID).send(f"Ушел участник `{member.name}#{member.discriminator}`")
 
 
 @bot.event
